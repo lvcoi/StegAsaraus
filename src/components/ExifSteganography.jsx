@@ -756,7 +756,7 @@ function ExifSteganography() {
               logger.info('[ExifSteganography] open file picker');
               fileInputRef?.click();
             }}
-            class="flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+            class="flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 shadow-sm transition-all hover:scale-105 hover:border-blue-500/50 hover:bg-blue-50"
           >
             <Upload class="h-4 w-4" />
             Choose JPEG
@@ -777,11 +777,11 @@ function ExifSteganography() {
             value={urlInput()}
             onInput={(e) => setUrlInput(e.currentTarget.value)}
             placeholder="https://example.com/photo.png"
-            class="flex-1 min-w-[240px] rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+            class="flex-1 min-w-[240px] rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           />
           <button
             onClick={fetchImageFromUrl}
-            class="rounded-lg bg-black px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+            class="rounded-lg border border-blue-500 bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/50 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60"
           >
             Fetch Image
           </button>
@@ -794,7 +794,7 @@ function ExifSteganography() {
         )}
       </div>
 
-      <div class="border border-gray-200 rounded-2xl p-6 space-y-6">
+      <div class="border border-blue-500/30 rounded-2xl p-6 space-y-6 bg-gradient-to-br from-blue-950/10 to-indigo-950/10 backdrop-blur-sm">
         <div class="flex flex-wrap items-center gap-4 justify-between">
           <h3 class="text-lg font-semibold text-gray-900">Exif Editor</h3>
           <div class="flex flex-wrap items-center gap-3">
@@ -811,20 +811,20 @@ function ExifSteganography() {
             <button
               onClick={applyPreset}
               disabled={!presetName()}
-              class="rounded-lg border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+              class="rounded-lg border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all hover:scale-105 hover:border-blue-500/50 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
             >
               Apply preset
             </button>
             <button
               onClick={applySampleMetadata}
-              class="rounded-lg border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+              class="rounded-lg border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all hover:scale-105 hover:border-blue-500/50 hover:bg-blue-50"
             >
               Fill sample metadata
             </button>
             <button
               onClick={() => setExifOpen((open) => !open)}
               disabled={!imageDataUrl()}
-              class="rounded-lg bg-black px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+              class="rounded-lg border border-blue-500 bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/50 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {exifOpen() ? 'Hide' : 'View'}
             </button>
@@ -838,7 +838,7 @@ function ExifSteganography() {
               type="text"
               value={make()}
               onInput={(e) => setMake(e.currentTarget.value)}
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
@@ -847,7 +847,7 @@ function ExifSteganography() {
               type="text"
               value={model()}
               onInput={(e) => setModel(e.currentTarget.value)}
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
@@ -856,7 +856,7 @@ function ExifSteganography() {
               type="text"
               value={software()}
               onInput={(e) => setSoftware(e.currentTarget.value)}
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
@@ -865,7 +865,7 @@ function ExifSteganography() {
               type="text"
               value={lensModel()}
               onInput={(e) => setLensModel(e.currentTarget.value)}
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
@@ -875,7 +875,7 @@ function ExifSteganography() {
               value={dateTimeOriginal()}
               onInput={(e) => setDateTimeOriginal(e.currentTarget.value)}
               placeholder="YYYY:MM:DD HH:MM:SS"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
@@ -884,7 +884,7 @@ function ExifSteganography() {
               type="text"
               value={imageDescription()}
               onInput={(e) => setImageDescription(e.currentTarget.value)}
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
@@ -893,7 +893,7 @@ function ExifSteganography() {
               type="text"
               value={artist()}
               onInput={(e) => setArtist(e.currentTarget.value)}
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
@@ -902,7 +902,7 @@ function ExifSteganography() {
               type="text"
               value={copyright()}
               onInput={(e) => setCopyright(e.currentTarget.value)}
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>
@@ -929,14 +929,14 @@ function ExifSteganography() {
                   value={pair.key}
                   onInput={(e) => updatePair(index, 'key', e.currentTarget.value)}
                   placeholder="Key"
-                  class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                  class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
                 <input
                   type="text"
                   value={pair.value}
                   onInput={(e) => updatePair(index, 'value', e.currentTarget.value)}
                   placeholder="Value"
-                  class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                  class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
                 <button
                   onClick={() => removePair(index)}
@@ -967,14 +967,14 @@ function ExifSteganography() {
               value={gpsLat()}
               onInput={(e) => setGpsLat(e.currentTarget.value)}
               placeholder="Latitude (e.g. 37.7749)"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
             <input
               type="text"
               value={gpsLon()}
               onInput={(e) => setGpsLon(e.currentTarget.value)}
               placeholder="Longitude (e.g. -122.4194)"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>
@@ -983,14 +983,14 @@ function ExifSteganography() {
           <button
             onClick={applyMetadata}
             disabled={!imageDataUrl()}
-            class="rounded-lg bg-black px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+            class="rounded-lg border border-blue-500 bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/50 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             Save
           </button>
           <button
             onClick={eraseMetadata}
             disabled={!imageDataUrl()}
-            class="rounded-lg border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+            class="rounded-lg border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 shadow-sm transition-all hover:scale-105 hover:border-blue-500/50 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
           >
             Erase all metadata
           </button>
@@ -1012,14 +1012,14 @@ function ExifSteganography() {
             <button
               onClick={downloadImage}
               disabled={!previewUrl()}
-              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-black text-white transition-colors hover:bg-gray-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg border border-blue-500 bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/50 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/60 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               <Download class="h-4 w-4" />
               Download JPEG
             </button>
           </div>
         </div>
-        <div class="border border-gray-300 rounded-lg p-4 bg-gray-50 flex items-center justify-center min-h-48 relative">
+        <div class="border border-gray-300 rounded-lg p-4 bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center min-h-48 relative shadow-sm">
           {previewUrl() && (
             <button
               onClick={clearPreview}
@@ -1059,7 +1059,7 @@ function ExifSteganography() {
         </div>
       )}
 
-      <div class="rounded-lg border border-gray-200 bg-gray-50 p-4">
+      <div class="rounded-lg border border-blue-500/30 bg-gradient-to-br from-blue-50 to-indigo-50 p-4 shadow-sm">
         <p class="text-sm text-gray-600">
           <strong class="font-medium text-gray-900">How it works:</strong> EXIF metadata is written into the JPEG file, including optional GPS coordinates and custom key/value data stored in UserComment.
         </p>
