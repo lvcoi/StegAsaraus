@@ -4,6 +4,7 @@ import { logger } from '../utils/logger.js';
 
 const MARKER_START = '###STEGANO_START###';
 const MARKER_END = '###STEGANO_END###';
+const SAMPLE_MESSAGE = 'Drop site changed. New time: 21:45.';
 
 const encodeBase64Utf8 = (value) => {
   const bytes = new TextEncoder().encode(value);
@@ -241,6 +242,13 @@ function PdfSteganography() {
               rows={4}
             />
           </div>
+
+          <button
+            onClick={() => setSecretMessage(SAMPLE_MESSAGE)}
+            class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+          >
+            Use sample message
+          </button>
 
           <button
             onClick={downloadEncodedPdf}

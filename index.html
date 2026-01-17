@@ -11,13 +11,178 @@
   </head>
   <body>
     <div id="root">
-      <main>
-        <div>
-          <h1>SteganoSaurus 🦕</h1>
-          <p>Hide messages in plain sight. Secure steganography for emoji, images, PDFs, and EXIF data.</p>
+      <div class="app-skeleton" role="status" aria-live="polite" aria-busy="true">
+        <div class="skeleton-header">
+          <div class="skeleton-orbit">
+            <span class="skeleton-core"></span>
+            <span class="skeleton-dot"></span>
+            <span class="skeleton-dot"></span>
+            <span class="skeleton-dot"></span>
+          </div>
+          <div class="skeleton-title"></div>
+          <div class="skeleton-subtitle"></div>
         </div>
-      </main>
+        <div class="skeleton-card">
+          <div class="skeleton-tabs">
+            <div class="skeleton-tab"></div>
+            <div class="skeleton-tab"></div>
+            <div class="skeleton-tab"></div>
+            <div class="skeleton-tab"></div>
+          </div>
+          <div class="skeleton-body">
+            <div class="skeleton-line"></div>
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line"></div>
+          </div>
+        </div>
+        <p class="skeleton-caption">Loading tools…</p>
+      </div>
     </div>
     <script type="module" src="/src/main.jsx"></script>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        font-family: "Manrope", "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, #f8fafc, #e2e8f0);
+        color: #0f172a;
+      }
+      .app-skeleton {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding: 48px 24px;
+        text-align: center;
+      }
+      .skeleton-header {
+        display: grid;
+        gap: 12px;
+        place-items: center;
+      }
+      .skeleton-orbit {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        position: relative;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.18), rgba(59, 130, 246, 0.04));
+        display: grid;
+        place-items: center;
+        animation: pulse 1.8s ease-in-out infinite;
+      }
+      .skeleton-core {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2563eb, #38bdf8);
+        box-shadow: 0 0 18px rgba(37, 99, 235, 0.45);
+        animation: coreGlow 2.4s ease-in-out infinite;
+      }
+      .skeleton-dot {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #1d4ed8;
+        opacity: 0.6;
+        animation: orbit 2.6s linear infinite;
+      }
+      .skeleton-dot:nth-child(2) {
+        animation-delay: 0s;
+      }
+      .skeleton-dot:nth-child(3) {
+        animation-delay: 0.9s;
+      }
+      .skeleton-dot:nth-child(4) {
+        animation-delay: 1.8s;
+      }
+      .skeleton-title {
+        width: 220px;
+        height: 18px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #e2e8f0, #cbd5f5, #e2e8f0);
+        background-size: 200% 100%;
+        animation: shimmer 1.6s infinite;
+      }
+      .skeleton-subtitle {
+        width: 300px;
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #e2e8f0, #dbeafe, #e2e8f0);
+        background-size: 200% 100%;
+        animation: shimmer 1.8s infinite;
+      }
+      .skeleton-card {
+        width: min(720px, 92vw);
+        background: #fff;
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+        display: grid;
+        gap: 20px;
+      }
+      .skeleton-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+      .skeleton-tab {
+        height: 28px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #f1f5f9, #e2e8f0, #f1f5f9);
+        background-size: 200% 100%;
+        animation: shimmer 1.4s infinite;
+      }
+      .skeleton-body {
+        display: grid;
+        gap: 12px;
+      }
+      .skeleton-line {
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #e2e8f0, #cbd5f5, #e2e8f0);
+        background-size: 200% 100%;
+        animation: shimmer 1.8s infinite;
+      }
+      .skeleton-line.short {
+        width: 70%;
+      }
+      .skeleton-caption {
+        font-size: 14px;
+        color: #475569;
+        letter-spacing: 0.02em;
+      }
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      @keyframes coreGlow {
+        0%, 100% { box-shadow: 0 0 12px rgba(37, 99, 235, 0.35); }
+        50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+      }
+      @keyframes orbit {
+        0% { transform: rotate(0deg) translateX(38px); }
+        100% { transform: rotate(360deg) translateX(38px); }
+      }
+      @media (max-width: 640px) {
+        .skeleton-tabs {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .skeleton-title {
+          width: 180px;
+        }
+        .skeleton-subtitle {
+          width: 240px;
+        }
+      }
+    </style>
   </body>
 </html>

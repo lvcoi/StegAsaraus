@@ -1,9 +1,9 @@
 # 🦕 SteganoSaurus
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![SolidJS](https://img.shields.io/badge/SolidJS-2C4F7C?style=for-the-badge&logo=solid&logoColor=white)](https://www.solidjs.com/)
 [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 > Hide messages in plain sight with secure client-side steganography
 
@@ -18,6 +18,12 @@ SteganoSaurus is a powerful web-based steganography tool that allows you to enco
 - 🔒 **100% Client-Side** - No server processing, complete privacy
 - 🎨 **Beautiful UI** - Modern, responsive design with Tailwind CSS
 - ⚡ **Lightning Fast** - Built with Vite for optimal performance
+
+## 📸 Screenshots
+
+Add a screenshot or short GIF to showcase the UI. Place it at `docs/screenshot.png` (or update the path below).
+
+![SteganoSaurus UI](docs/screenshot.png)
 
 ## 🚀 Getting Started
 
@@ -82,11 +88,13 @@ npm run build
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18 with TypeScript
+- **Frontend**: SolidJS with JavaScript
 - **Build Tool**: Vite
 - **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Database**: Supabase (optional, for future features)
+- **Icons**: Lucide Solid
+- **Maps**: Leaflet (EXIF GPS preview)
+- **EXIF**: piexifjs
+- **Database**: Supabase (optional, future features)
 
 ## 🔒 Security
 
@@ -105,6 +113,12 @@ Contributions are what make the open-source community such an amazing place to l
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## 🧭 Roadmap
+
+- Add drag-and-drop for image/PDF uploads
+- Export/import presets for EXIF metadata
+- Provide shareable, encrypted message bundles
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -115,7 +129,7 @@ This tool is intended for educational and legitimate purposes only. Users are re
 
 ## 🙏 Acknowledgments
 
-- [React](https://reactjs.org/) for the amazing UI library
+- [SolidJS](https://www.solidjs.com/) for the reactive UI library
 - [Vite](https://vitejs.dev/) for the blazing fast build tool
 - [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
 - [Lucide](https://lucide.dev/) for the beautiful icon set

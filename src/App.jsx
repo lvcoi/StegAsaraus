@@ -61,6 +61,10 @@ function App() {
           <p class="text-lg text-blue-100 max-w-2xl mx-auto">
             Hide messages in plain sight with secure client-side encryption for emoji, images, PDFs, and EXIF data
           </p>
+          <div class="mt-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm text-blue-700">
+            <Lock class="w-4 h-4" />
+            All processing is local to your browser.
+          </div>
         </div>
 
         {/* Main Card */}
