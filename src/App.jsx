@@ -46,6 +46,10 @@ function App() {
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             Hide messages in plain sight. Secure steganography for emoji, images, PDFs, and EXIF data.
           </p>
+          <div class="mt-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm text-blue-700">
+            <Lock class="w-4 h-4" />
+            All processing is local to your browser.
+          </div>
         </div>
 
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">

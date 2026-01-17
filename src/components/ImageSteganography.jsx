@@ -1,17 +1,34 @@
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, createMemo, onMount } from 'solid-js';
 import { logger } from '../utils/logger.js';
 import { Upload, Download } from 'lucide-solid';
+
+const MESSAGE_DELIMITER = '###END###';
+const SAMPLE_MESSAGE = 'The vault opens at 0700.';
 
 function ImageSteganography() {
   const [mode, setMode] = createSignal('encode');
   const [secretMessage, setSecretMessage] = createSignal('');
   const [decodedMessage, setDecodedMessage] = createSignal('');
   const [imagePreview, setImagePreview] = createSignal(null);
+  const [imageInfo, setImageInfo] = createSignal({ width: 0, height: 0 });
+  const [inlineError, setInlineError] = createSignal('');
   let canvasRef;
   let fileInputRef;
 
   onMount(() => {
     logger.info('[ImageSteganography] mounted');
+  });
+
+  const capacityBits = createMemo(() => {
+    const { width, height } = imageInfo();
+    return width && height ? width * height : 0;
+  });
+
+  const capacityChars = createMemo(() => {
+    const bits = capacityBits();
+    if (!bits) return 0;
+    const bytes = Math.floor(bits / 8);
+    return Math.max(bytes - MESSAGE_DELIMITER.length, 0);
   });
 
   const handleImageUpload = (e) => {
@@ -28,6 +45,8 @@ function ImageSteganography() {
         const img = new Image();
         img.onload = () => {
           setImagePreview(event.target?.result);
+          setImageInfo({ width: img.width, height: img.height });
+          setInlineError('');
           const canvas = canvasRef;
           if (canvas) {
             canvas.width = img.width;
@@ -70,7 +89,7 @@ function ImageSteganography() {
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageData.data;
 
-      const messageWithDelimiter = secretMessage() + '###END###';
+      const messageWithDelimiter = secretMessage() + MESSAGE_DELIMITER;
       const binary = messageWithDelimiter
         .split('')
         .map(char => char.charCodeAt(0).toString(2).padStart(8, '0'))
@@ -78,7 +97,7 @@ function ImageSteganography() {
 
       if (binary.length > data.length / 4) {
         logger.warn('[ImageSteganography] message too long for image', { bits: binary.length, capacity: data.length / 4 });
-        alert('Message is too long for this image!');
+        setInlineError('Message is too long for this image. Try a larger image or shorten the message.');
         logger.userError('Message is too long for this image.', { bits: binary.length, capacity: data.length / 4 });
         return;
       }
@@ -89,6 +108,7 @@ function ImageSteganography() {
 
       ctx.putImageData(imageData, 0, 0);
       setImagePreview(canvas.toDataURL('image/png'));
+      setInlineError('');
       logger.info('[ImageSteganography] encode complete', { secretLen: secretMessage().length });
     } catch (err) {
       logger.error('[ImageSteganography] encodeMessage error', err);
@@ -214,6 +234,9 @@ function ImageSteganography() {
             Choose Image
           </button>
         </div>
+        <p class="mt-2 text-sm text-gray-500">
+          Tip: Larger images allow longer messages (1 bit per pixel). PNG works best for preserving hidden data.
+        </p>
       </div>
 
       {mode() === 'encode' ? (
@@ -225,14 +248,39 @@ function ImageSteganography() {
             <textarea
               value={secretMessage()}
               onInput={(e) => {
-                console.log('[ImageSteganography] secretMessage input len', e.currentTarget.value.length);
+                logger.debug('[ImageSteganography] secretMessage input len', e.currentTarget.value.length);
                 setSecretMessage(e.currentTarget.value);
+                setInlineError('');
               }}
               placeholder="Enter your secret message..."
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
               rows={4}
             />
+            <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-gray-500">
+              {capacityChars() ? (
+                <span>Capacity: ~{capacityChars()} chars</span>
+              ) : (
+                <span>Upload an image to calculate capacity.</span>
+              )}
+              <span>Message length: {secretMessage().length} chars</span>
+            </div>
           </div>
+
+          <button
+            onClick={() => {
+              setSecretMessage(SAMPLE_MESSAGE);
+              setInlineError('');
+            }}
+            class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+          >
+            Use sample message
+          </button>
+
+          {inlineError() && (
+            <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {inlineError()}
+            </div>
+          )}
 
           <button
             onClick={encodeMessage}

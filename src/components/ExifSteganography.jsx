@@ -246,6 +246,21 @@ const PRESETS = [
   },
 ];
 
+const SAMPLE_METADATA = {
+  make: 'Hasselblad',
+  model: 'X2D 100C',
+  software: 'Phocus 3.0',
+  lensModel: 'XCD 55V',
+  imageDescription: 'Harbor skyline at sunrise',
+  artist: 'SteganoSaurus Demo',
+  copyright: '2025 SteganoSaurus',
+  pairs: [
+    { key: 'Project', value: 'Coastline Survey' },
+    { key: 'Access', value: 'Confidential' },
+  ],
+  gps: { lat: 37.7749, lon: -122.4194 },
+};
+
 const formatExifDate = (date) => {
   const pad = (value) => String(value).padStart(2, '0');
   return `${date.getFullYear()}:${pad(date.getMonth() + 1)}:${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
@@ -569,6 +584,21 @@ function ExifSteganography() {
     }
   };
 
+  const applySampleMetadata = () => {
+    setPresetName('');
+    setMake(SAMPLE_METADATA.make);
+    setModel(SAMPLE_METADATA.model);
+    setSoftware(SAMPLE_METADATA.software);
+    setLensModel(SAMPLE_METADATA.lensModel);
+    setDateTimeOriginal(formatExifDate(new Date()));
+    setImageDescription(SAMPLE_METADATA.imageDescription);
+    setArtist(SAMPLE_METADATA.artist);
+    setCopyright(SAMPLE_METADATA.copyright);
+    setCustomPairs(SAMPLE_METADATA.pairs.map((pair) => ({ ...pair })));
+    setGpsLat(String(SAMPLE_METADATA.gps.lat));
+    setGpsLon(String(SAMPLE_METADATA.gps.lon));
+  };
+
   const buildCustomPayload = () => {
     const entries = customPairs()
       .map((pair) => ({
@@ -784,6 +814,12 @@ function ExifSteganography() {
               class="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
             >
               Apply preset
+            </button>
+            <button
+              onClick={applySampleMetadata}
+              class="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              Fill sample metadata
             </button>
             <button
               onClick={() => setExifOpen((open) => !open)}

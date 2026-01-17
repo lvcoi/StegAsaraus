@@ -7,6 +7,22 @@ const ZERO_WIDTH_CHARS = {
   '1': '\u200C',
 };
 const MESSAGE_TERMINATOR = '###END###';
+const SAMPLE_MESSAGE = 'Meet at dawn. Bring the map.';
+const SAMPLE_COVER = '🌟✨🎉🎊';
+
+const encodeEmojiMessage = (message, cover) => {
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(message + MESSAGE_TERMINATOR);
+  let binary = '';
+  for (const b of bytes) binary += b.toString(2).padStart(8, '0');
+
+  const encoded = binary
+    .split('')
+    .map(bit => (bit === '0' ? ZERO_WIDTH_CHARS['0'] : ZERO_WIDTH_CHARS['1']))
+    .join('');
+
+  return cover + encoded;
+};
 
 function EmojiSteganography() {
   const [mode, setMode] = createSignal('encode');
@@ -26,20 +42,7 @@ function EmojiSteganography() {
         logger.warn('[EmojiSteganography] encodeMessage aborted: missing secretMessage or coverEmoji');
         return;
       }
-      const encoder = new TextEncoder();
-      const bytes = encoder.encode(secretMessage() + MESSAGE_TERMINATOR);
-      let binary = '';
-      for (const b of bytes) binary += b.toString(2).padStart(8, '0');
-
-      const encoded = binary
-        .split('')
-        .map(bit => {
-          if (bit === '0') return ZERO_WIDTH_CHARS['0'];
-          else return ZERO_WIDTH_CHARS['1'];
-        })
-        .join('');
-
-      const result = coverEmoji() + encoded;
+      const result = encodeEmojiMessage(secretMessage(), coverEmoji());
       setOutput(result);
       logger.info('[EmojiSteganography] encodeMessage complete', { secretLen: secretMessage().length, outputLen: result.length });
     } catch (err) {
@@ -101,6 +104,18 @@ function EmojiSteganography() {
       logger.error('[EmojiSteganography] unexpected clipboard error', err);
       logger.userError('Unexpected clipboard error.', { err });
     }
+  };
+
+  const useSampleEncode = () => {
+    setSecretMessage(SAMPLE_MESSAGE);
+    setCoverEmoji(SAMPLE_COVER);
+    const result = encodeEmojiMessage(SAMPLE_MESSAGE, SAMPLE_COVER);
+    setOutput(result);
+  };
+
+  const useSampleDecode = () => {
+    const result = encodeEmojiMessage(SAMPLE_MESSAGE, SAMPLE_COVER);
+    setOutput(result);
   };
 
   return (
@@ -174,6 +189,12 @@ function EmojiSteganography() {
           >
             Hide Message in Emoji
           </button>
+          <button
+            onClick={useSampleEncode}
+            class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+          >
+            Use sample message
+          </button>
 
           {output() && (
             <div>
@@ -215,6 +236,13 @@ function EmojiSteganography() {
               rows={4}
             />
           </div>
+
+          <button
+            onClick={useSampleDecode}
+            class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+          >
+            Load sample encoded text
+          </button>
 
           <button
             onClick={decodeMessage}
