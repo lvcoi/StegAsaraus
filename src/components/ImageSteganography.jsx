@@ -283,16 +283,18 @@ function ImageSteganography() {
             </div>
           )}
 
-          {imagePreview() && (
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Image Preview
-              </label>
-              <div class="border border-gray-300 rounded-lg p-4 bg-gray-50">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              Image Preview
+            </label>
+            <div class="border border-gray-300 rounded-lg p-4 bg-gray-50 flex items-center justify-center min-h-40">
+              {imagePreview() ? (
                 <img src={imagePreview()} alt="Preview" class="max-w-full h-auto" />
-              </div>
+              ) : (
+                <span class="text-sm text-gray-500">Upload an image to preview it here.</span>
+              )}
             </div>
-          )}
+          </div>
         </div>
       )}
 

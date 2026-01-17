@@ -41,7 +41,7 @@ function App() {
             <Lock class="w-12 h-12 text-blue-600" />
           </div>
           <h1 class="text-5xl font-bold text-gray-900 mb-4">
-            SteganoVault
+            SteganoSaurus 🦕
           </h1>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             Hide messages in plain sight. Secure steganography for emoji, images, PDFs, and EXIF data.
