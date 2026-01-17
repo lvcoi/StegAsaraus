@@ -34,88 +34,103 @@ function App() {
   ];
 
   return (
-    <div class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
-      {/* Header */}
-      <header class="border-b border-white/10 backdrop-blur-sm bg-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <div class="p-2.5 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg">
-                <Lock class="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h1 class="text-2xl font-bold text-white flex items-center gap-2">
-                  SteganoSaurus <span class="text-2xl">🦕</span>
-                </h1>
-                <p class="text-sm text-blue-200">Secure steganography toolkit</p>
-              </div>
+    <div class="min-h-screen bg-white">
+      {/* Header - Next.js style */}
+      <header class="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md">
+        <div class="flex h-16 items-center px-6">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-black">
+              <Lock class="h-5 w-5 text-white" />
             </div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-xl font-semibold tracking-tight">SteganoSaurus</h1>
+              <span class="text-xl">🦕</span>
+            </div>
+          </div>
+          <div class="ml-auto flex items-center gap-2 text-sm">
+            <Lock class="h-4 w-4 text-gray-500" />
+            <span class="text-gray-600">Client-side only</span>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Hero Section */}
-        <div class="text-center mb-8">
-          <p class="text-lg text-blue-100 max-w-2xl mx-auto">
-            Hide messages in plain sight with secure client-side encryption for emoji, images, PDFs, and EXIF data
-          </p>
-          <div class="mt-4 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm text-blue-700">
-            <Lock class="w-4 h-4" />
-            All processing is local to your browser.
+      {/* Main Layout */}
+      <div class="flex">
+        {/* Sidebar Navigation - Next.js style */}
+        <aside class="sticky top-16 h-[calc(100vh-4rem)] w-64 border-r border-gray-200 bg-gray-50/50">
+          <nav class="flex flex-col gap-1 p-4">
+            <div class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Steganography Tools
+            </div>
+            {tabs.map((tab) => {
+              return (
+                <button
+                  onClick={() => {
+                    logger.info('[App] switching tab to', tab.id);
+                    setActiveTab(tab.id);
+                  }}
+                  class={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                    activeTab() === tab.id
+                      ? 'bg-black text-white'
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+                >
+                  <Dynamic component={tab.icon} class="h-5 w-5" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+          
+          {/* Info Panel in Sidebar */}
+          <div class="mx-4 mt-6 rounded-lg border border-gray-200 bg-white p-4">
+            <div class="mb-2 flex items-center gap-2">
+              <div class="flex h-6 w-6 items-center justify-center rounded bg-gray-100">
+                <span class="text-sm">💡</span>
+              </div>
+              <h3 class="text-sm font-semibold text-gray-900">About</h3>
+            </div>
+            <p class="text-xs leading-relaxed text-gray-600">
+              Hide messages in plain sight using secure client-side steganography. All processing happens in your browser.
+            </p>
           </div>
-        </div>
+        </aside>
 
-        {/* Main Card */}
-        <div class="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20">
-          {/* Tabs Navigation */}
-          <div class="border-b border-gray-200/50 bg-gradient-to-r from-gray-50 to-white">
-            <nav class="flex">
-              {tabs.map((tab) => {
-                return (
-                  <button
-                    onClick={() => {
-                      logger.info('[App] switching tab to', tab.id);
-                      setActiveTab(tab.id);
-                    }}
-                    class={`flex-1 py-4 px-6 text-center font-medium text-sm transition-all duration-200 relative ${
-                      activeTab() === tab.id
-                        ? 'text-blue-600'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50/50'
-                    }`}
-                  >
-                    <div class="flex items-center justify-center gap-2.5">
-                      <Dynamic component={tab.icon} class="w-5 h-5" />
-                      <span class="font-semibold">{tab.label}</span>
-                    </div>
-                    {activeTab() === tab.id && (
-                      <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600" />
-                    )}
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
+        {/* Main Content Area */}
+        <main class="flex-1">
+          <div class="mx-auto max-w-4xl px-8 py-8">
+            {/* Page Header */}
+            <div class="mb-8">
+              <h2 class="mb-2 text-3xl font-bold tracking-tight text-gray-900">
+                {tabs.find(t => t.id === activeTab())?.label} Steganography
+              </h2>
+              <p class="text-gray-600">
+                {activeTab() === 'emoji' && 'Hide messages using invisible zero-width characters between emoji'}
+                {activeTab() === 'image' && 'Encode secret messages into images using LSB technique'}
+                {activeTab() === 'pdf' && 'Conceal data within PDF documents'}
+                {activeTab() === 'exif' && 'Hide information in image metadata'}
+              </p>
+            </div>
 
-          {/* Content Area */}
-          <div class="p-8 md:p-10 lg:p-12 bg-gradient-to-br from-white to-gray-50/30">
+            {/* Error Display */}
             {errorVisible() && (
-              <div class="mb-6 rounded-xl border border-red-300 bg-gradient-to-br from-red-50 to-red-100/50 text-red-800 p-4 flex items-start justify-between gap-4 shadow-sm">
-                <div class="text-sm font-medium">{errorText()}</div>
+              <div class="mb-6 flex items-start justify-between gap-4 rounded-lg border border-red-200 bg-red-50 p-4">
+                <div class="text-sm text-red-800">{errorText()}</div>
                 <button 
-                  class="text-sm font-semibold underline hover:no-underline transition-all" 
+                  class="text-sm font-medium text-red-600 hover:text-red-700" 
                   onClick={() => setErrorVisible(false)}
                 >
                   Dismiss
                 </button>
               </div>
             )}
+
+            {/* Content */}
             <Suspense fallback={
-              <div class="flex items-center justify-center py-12">
+              <div class="flex items-center justify-center py-20">
                 <div class="text-center">
-                  <div class="inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-3" />
-                  <div class="text-sm text-gray-600 font-medium">Loading tools...</div>
+                  <div class="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-black" />
+                  <div class="text-sm text-gray-600">Loading...</div>
                 </div>
               </div>
             }>
@@ -125,17 +140,7 @@ function App() {
               {activeTab() === 'exif' && <ExifSteganography />}
             </Suspense>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div class="mt-8 text-center">
-          <div class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-            <Lock class="w-4 h-4 text-blue-300" />
-            <p class="text-sm text-blue-100 font-medium">
-              100% client-side processing • Your data never leaves your device
-            </p>
-          </div>
-        </div>
+        </main>
       </div>
     </div>
   );
