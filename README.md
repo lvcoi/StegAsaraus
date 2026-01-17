@@ -35,17 +35,20 @@ Add a screenshot or short GIF to showcase the UI. Place it at `docs/screenshot.p
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/SteganoSaurus.git
 cd SteganoSaurus
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -61,6 +64,7 @@ npm run build
 ## 📖 Usage
 
 ### Emoji Steganography
+
 1. Type your secret message
 2. Choose or enter cover emoji
 3. Click "Encode" to hide your message
@@ -68,6 +72,7 @@ npm run build
 5. Use "Decode" to reveal hidden messages
 
 ### Image Steganography
+
 1. Upload an image file
 2. Enter your secret message
 3. Click "Encode" to hide the message in the image
@@ -75,12 +80,14 @@ npm run build
 5. Use the "Decode" tab to extract messages from images
 
 ### PDF Steganography
+
 1. Upload a PDF document
 2. Add your hidden data
 3. Encode and download the modified PDF
 4. Decode to extract hidden information
 
 ### EXIF Data
+
 1. Upload an image
 2. Add custom metadata
 3. Save the image with embedded EXIF data
@@ -136,6 +143,4 @@ This tool is intended for educational and legitimate purposes only. Users are re
 
 ---
 
-<div align="center">
-  Made with ❤️ by the StegAsarus team
-</div>
+Made with ❤️ by the StegAsarus team
