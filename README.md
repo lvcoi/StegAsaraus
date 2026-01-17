@@ -41,19 +41,19 @@ git clone https://github.com/yourusername/SteganoSaurus.git
 cd SteganoSaurus
 ```
 
-2. Install dependencies:
+1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Start the development server:
+1. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+1. Open your browser and navigate to `http://localhost:5173`
 
 ### Building for Production
 
